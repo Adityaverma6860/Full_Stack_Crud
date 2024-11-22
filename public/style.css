@@ -1,0 +1,16 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    color: white;
+}
+
+body {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,63,121,0.7719420531884629) 75%, rgba(120,194,209,1) 100%); 
+}
+
+.errormsg , .errormsg1 , .errormsg2{
+    color: red;
+    font-style: italic;
+}

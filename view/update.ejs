@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->  
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Edit User</title>
+  </head>
+  <body>
+    <div class="container my-4">
+      <div id="message_update" class="m-2"></div>
+      <div class="d-flex flex-row justify-content-between my-3">
+        <h1 class="h3">Edit User</h1>
+        <a href="/read">
+          <button class="btn btn-secondary">See All</button>
+        </a>
+      </div>
+
+      <form id="myFormUpdate">
+        <!-- Hidden Field for User ID -->
+        <input type="hidden" id="formId" value="<%- data.id %>" /> 
+
+        <div class="mb-3">
+          <label for="formName" class="form-label">Name</label>
+          <input
+            type="text"
+            name="name"
+            class="form-control"
+            id="formName"
+            value="<%- data.name %>"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="formEmail" class="form-label">Email Address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="formEmail"
+            name="email"
+            value="<%- data.email %>"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="formNumber" class="form-label">Phone Number</label>
+          <input
+            type="text"
+            class="form-control"
+            id="formNumber"
+            name="phone"
+            value="<%- data.phone %>"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="button" onclick="history.go(-1)" class="btn btn-dark">Back</button>
+      </form>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.js"
+      integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $(document).ready(function () {
+        $("#myFormUpdate").submit(function (e) {
+          e.preventDefault();
+
+          // AJAX PUT request for update
+          $.ajax({
+            type: "PUT",
+            url: "/update", // Update route in the backend
+            data: {
+              id: $("#formId").val(), // Hidden ID field
+              name: $("#formName").val(),
+              email: $("#formEmail").val(),
+              phone: $("#formNumber").val(),
+            },
+            success: function (response) {
+              if (response.status === 200) {
+                $("#message_update").html(
+                  `<div class="alert alert-success" role="alert">User updated successfully!</div>`
+                );
+
+                // Redirect to a specific URL after success
+                setTimeout(() => {
+                  window.location.href = response.url;
+                }, 2000);
+              } else {
+                $("#message_update").html(
+                  `<div class="alert alert-danger" role="alert">Error: ${response.message}</div>`
+                );
+              }
+            },
+            error: function (error) {
+              console.error("Update failed:", error);
+              $("#message_update").html(
+                `<div class="alert alert-danger" role="alert">An error occurred while updating the user.</div>`
+              );
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
+

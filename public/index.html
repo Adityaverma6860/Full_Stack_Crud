@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->  
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Create</title>
+  </head>
+  <body>
+    <div class="container my-2">
+      <div id="message" class="m-2"></div>
+      <div class="d-flex flex-row justify-content-between bd-highlight my-3">
+        <h1 class="h2 text-center">Enter the details</h1>
+        <a href="/read">
+          <button class="btn btn-light">See All</button>
+        </a>
+      </div>
+
+      <form id="myForm"> 
+        <div class="mb-3">
+          <label class="form-label">Name</label>
+          <input type="text" name="name" class="form-control" id="formName" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="formEmail"
+            name="email"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Phone Number</label>
+          <input
+            type="text"
+            class="form-control"
+            id="formNumber"
+            name="phone"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary enableOnInput">
+          Submit
+        </button>
+      </form>
+     </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.js"
+      integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      //name field validation
+      function nameValidation() {
+        var nameRegex = /^[A-Za-z ]+$/;
+        var nameInput = $("#formName").val();
+        $(".errormsg1").remove();
+        if (nameInput.length < 10 && nameRegex.test(nameInput)) {
+          return 1;
+        } else {
+          $("#formName").after(`<div class="errormsg1">Invalid Name!</div>`);
+          return 0;
+        }
+      }
+
+      // number input validation
+      function numberValidation() {
+        console.log("number validation");
+        $(".errormsg2").remove();
+        var a = $("#formNumber").val();
+        var filter = /^[0-9]*$/;
+        if (filter.test(a)) {
+          console.log("-------", filter.test(a));
+          if (a.length != 10) {
+            $("#formNumber").after(
+              `<div class="errormsg2">Please enter 10 digit number</div>`
+            );
+            return 0;
+          } else {
+            $(".errormsg2").remove();
+            return 1;
+          }
+        } else {
+          $("#formNumber").after(
+            `<div class="errormsg2">Please enter correct phone number</div>`
+          );
+          return 0;
+        }
+      }
+
+      // email input validation
+      function emailValidation() {
+        $(".errormsg").remove();
+        var emailData = $("#formEmail").val();
+        var testEmail = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
+        if (testEmail.test(emailData)) {
+          $(".errormsg").remove();
+          return 1;
+        } else {
+          $("#formEmail").after(`<div class="errormsg">Invalid Email!</div>`);
+          return 0;
+        }
+      }
+
+      //disabling button      ( Below Apply Validation )
+      function buttonFade() {
+        $(".enableOnInput").prop("disabled", true);
+        if (
+          nameValidation() == 1 &&
+          emailValidation() == 1 &&
+          numberValidation() == 1
+        ) {
+          $(".enableOnInput").prop("disabled", false);
+        }
+      }
+
+      $(document).ready(function () {
+        $(".enableOnInput").prop("disabled", true);
+
+        $("#formName").keyup(function () {
+          nameValidation();
+          buttonFade();
+        });
+        $("#formEmail").keyup(function () {
+          emailValidation();
+          buttonFade();
+        });
+        $("#formNumber").keyup(function () {
+          numberValidation();
+          buttonFade();
+        });
+
+        $("#myForm").submit(function (e) {
+          e.preventDefault();
+
+          var ajaxData = $(this).serialize();
+          console.log("---", ajaxData);
+
+          $.ajax({
+            type: "post",
+            url: "/create",
+            data: ajaxData,
+            success: function (result, status) 
+             {
+              if (result.status == 201) {
+                $("#message").html(
+                  `<div class="alert alert-success" role="alert">${result.message} </div>`
+                );
+ 
+                   setTimeout(() => {
+                  window.location.replace(result.url);
+                }, 2000);
+              } else {
+                $("#message").html(
+                  `<div class="alert alert-danger" role="alert">${result.message}</div>`
+                );
+              }
+            },
+             
+            error: function (status, err) {
+              console.log(err);
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
