@@ -46,10 +46,14 @@ Dynamically update the UI without reloading the page.
 5. Security:
 Sanitized inputs to prevent SQL injection attacks.
 Secure endpoints for CRUD operations.
-Technologies Used:
+
+**Technologies Used:**
+
 Frontend: HTML, CSS, JavaScript, AJAX for dynamic UI updates.
 Backend: Node.js, Express.js for RESTful APIs.
 Database: MySQL for structured data storage and querying.
+
+
 
 **Pakage :**
 
