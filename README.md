@@ -1,7 +1,7 @@
-Description :
+**Description :**
 A dynamic web application that allows users to perform Create, Read, Update, and Delete (CRUD) operations seamlessly. Built with Node.js and Express.js for backend processing, MySQL as the database, and AJAX for real-time interaction, it ensures a fast and interactive user experience.
 
-Table of Contents
+**Table of Contents**
 
 Step 1 – Initiate a node js server
 
@@ -25,7 +25,8 @@ Step 10 – Delete Operation using Ajax with count update
 
 Step 11 – Update Operation using Ajax
 
-Key Features:
+**Key Features:**
+
 1. User Management:
 Add new users with relevant details (e.g., name, email, role).
 View a list of all users with paginated results for better organization.
@@ -50,7 +51,7 @@ Frontend: HTML, CSS, JavaScript, AJAX for dynamic UI updates.
 Backend: Node.js, Express.js for RESTful APIs.
 Database: MySQL for structured data storage and querying.
 
-Pakage :
+**Pakage :**
 
 npm init
 
