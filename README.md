@@ -49,4 +49,10 @@ Technologies Used:
 Frontend: HTML, CSS, JavaScript, AJAX for dynamic UI updates.
 Backend: Node.js, Express.js for RESTful APIs.
 Database: MySQL for structured data storage and querying.
-Workflow:
+
+Pakage :
+
+npm init
+
+npm install mysql express nodemon dotenv cors body-parser ejs 
+ 
