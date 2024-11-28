@@ -2,18 +2,28 @@ Description :
 A dynamic web application that allows users to perform Create, Read, Update, and Delete (CRUD) operations seamlessly. Built with Node.js and Express.js for backend processing, MySQL as the database, and AJAX for real-time interaction, it ensures a fast and interactive user experience.
 
 Table of Contents
+
 Step 1 – Initiate a node js server
+
 Step 2 – Create your first API
-Step 3 – Let’s create database
+
+Step 3 – create database
+
 Step 4 – Connect database with backend
+
 Step 5 – Setting up frontend
+
 Step 6 – Form Validation (Frontend)
+
 Step 7 – Create Operation using Ajax
+
 Step 8 – Read Operation using Ajax
+
 Step 9 – Adding count at the top
+
 Step 10 – Delete Operation using Ajax with count update
+
 Step 11 – Update Operation using Ajax
-Step 12 – Checking if detail already present in database
 
 Key Features:
 1. User Management:
